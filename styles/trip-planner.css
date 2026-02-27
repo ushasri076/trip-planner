@@ -1,0 +1,239 @@
+/* ===== Trip Planner Additional Styles ===== */
+
+.trip-form-section {
+    background: linear-gradient(135deg, rgba(0, 166, 153, 0.05), rgba(0, 166, 153, 0.02));
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid var(--primary-color);
+}
+
+.form-wizard-steps {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+}
+
+.step {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--light-bg);
+    border: 2px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.step.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+.step.completed {
+    background: var(--success-color);
+    color: white;
+    border-color: var(--success-color);
+}
+
+.itinerary-view {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.itinerary-header {
+    background: linear-gradient(135deg, var(--primary-color), #00938A);
+    color: white;
+    padding: 2rem;
+}
+
+.itinerary-body {
+    padding: 2rem;
+}
+
+.day-card {
+    background: white;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.day-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(0, 166, 153, 0.15);
+}
+
+.day-card.expanded {
+    background: linear-gradient(135deg, rgba(0, 166, 153, 0.05), rgba(0, 166, 153, 0.02));
+    border-color: var(--primary-color);
+}
+
+.day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.day-info {
+    flex: 1;
+}
+
+.day-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.day-date {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.activity-list {
+    margin-top: 1rem;
+}
+
+.activity-card {
+    background: var(--light-bg);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+    border-left: 3px solid var(--primary-color);
+}
+
+.activity-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 0.5rem;
+}
+
+.activity-title {
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.activity-time {
+    background: var(--primary-color);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+}
+
+.activity-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-top: 0.5rem;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cost-summary {
+    background: linear-gradient(135deg, rgba(6, 167, 125, 0.05), rgba(0, 166, 153, 0.05));
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--success-color);
+    margin-top: 1rem;
+}
+
+.cost-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.cost-row:last-child {
+    margin-bottom: 0;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.budget-alert {
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(230, 57, 70, 0.05));
+    color: var(--danger-color);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    border-left: 4px solid var(--danger-color);
+}
+
+.budget-alert.warning {
+    background: linear-gradient(135deg, rgba(247, 127, 0, 0.1), rgba(247, 127, 0, 0.05));
+    color: var(--warning-color);
+    border-left-color: var(--warning-color);
+}
+
+.budget-alert.success {
+    background: linear-gradient(135deg, rgba(6, 167, 125, 0.1), rgba(6, 167, 125, 0.05));
+    color: var(--success-color);
+    border-left-color: var(--success-color);
+}
+
+.export-controls {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.attachment-list {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.attachment-item {
+    padding: 0.75rem;
+    background: var(--light-bg);
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.attachment-icon {
+    font-size: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .day-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .activity-details {
+        grid-template-columns: 1fr;
+    }
+
+    .export-controls {
+        flex-direction: column;
+    }
+
+    .export-controls button {
+        width: 100%;
+    }
+}
