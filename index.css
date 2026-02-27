@@ -352,11 +352,15 @@ h3 {
     gap: 1rem;
 }
 
-.button-group {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-}
+    /* Local cost estimator styles */
+    .local-cost-container {
+        max-width: 600px;
+    }
+    .local-cost-container .info-text {
+        font-size: 1rem;
+        color: var(--text-dark);
+    }
+
 
 /* ===== Dashboard Styles ===== */
 .dashboard-container {

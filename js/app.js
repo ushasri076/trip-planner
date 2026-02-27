@@ -106,6 +106,7 @@ class SafeWanderApp {
         // Initialize specialized modules
         window.tripPlannerApp = new TripPlannerApp(this);
         window.safetyAnalyzerApp = new SafetyAnalyzerApp(this);
+        window.localCostApp = new LocalCostApp(this);
         window.emergencySystemApp = new EmergencySystemApp(this);
     }
 
@@ -138,7 +139,7 @@ class SafeWanderApp {
             <div class="trip-item">
                 <h4>${trip.destination}</h4>
                 <p>${new Date(trip.startDate).toLocaleDateString()} - ${new Date(trip.endDate).toLocaleDateString()}</p>
-                <p>Budget: $${trip.budget} | Safety Score: ${trip.safetyScore || 'Pending'}%</p>
+                <p>Budget: ${UtilityFunctions.formatUSDINR(trip.budget)} | Safety Score: ${trip.safetyScore || 'Pending'}%</p>
             </div>
         `).join('');
     }

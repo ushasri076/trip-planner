@@ -33,6 +33,20 @@ class TripPlannerApp {
                 lat: 13.7563,
                 lng: 100.5018,
                 attractions: ['Grand Palace', 'Wat Phra Kaew', 'Floating Markets', 'Lumphini Park', 'Tian Temple']
+            },
+            // Added examples for Indian pilgrimage route
+            'Tirupati': {
+                country: 'India',
+                lat: 13.6288,
+                lng: 79.4192,
+                attractions: ['Sri Venkateswara Temple', 'Govindaraja Swamy Temple', 'Alamelu Mangapuram'],
+                nearby: ['Annavaram']
+            },
+            'Annavaram': {
+                country: 'India',
+                lat: 16.9786,
+                lng: 82.2308,
+                attractions: ['Sri Veera Venkata Satyanarayana Swamy Temple', 'Hill Viewpoint'],
             }
         };
 
@@ -135,17 +149,30 @@ class TripPlannerApp {
             country: 'Unknown'
         };
 
+        // build a visiting order that includes the main destination plus any nearby stops
+        const itineraryPlaces = [destination];
+        if (destData.nearby && Array.isArray(destData.nearby)) {
+            itineraryPlaces.push(...destData.nearby);
+        }
+
         const itinerary = [];
 
         for (let i = 0; i < days; i++) {
             const day = new Date(startDate);
             day.setDate(day.getDate() + i);
 
-            const activities = this.generateDayActivities(i + 1, interests, destData.attractions, budgetPerDay);
+            // choose the place for this day; after we've visited all listed places, stay at the main destination
+            const placeIndex = Math.min(i, itineraryPlaces.length - 1);
+            const placeName = itineraryPlaces[placeIndex];
+            const placeData = this.mockDestinations[placeName] || destData;
+            const attractions = placeData.attractions || destData.attractions;
+
+            const activities = this.generateDayActivities(i + 1, interests, attractions, budgetPerDay);
             
             itinerary.push({
                 dayNumber: i + 1,
                 date: day.toLocaleDateString(),
+                place: placeName,
                 activities: activities,
                 estimatedCost: Math.round(budgetPerDay),
                 safetyLevel: this.calculateDaySafety(day)
@@ -188,14 +215,19 @@ class TripPlannerApp {
 
         const activities = [];
         
-        // Add morning activity
+        // Determine attractions index to avoid repeating the same location every day
+        const attrIndex = (dayNumber - 1) % attractions.length;
+        const chosenAttraction = attractions[attrIndex];
+
+        // Add morning activity with a different landmark each day
         activities.push({
             ...activityTemplates.morning[Math.floor(Math.random() * activityTemplates.morning.length)],
-            location: attractions[Math.floor(Math.random() * attractions.length)]
+            location: chosenAttraction
         });
 
-        // Add afternoon activity based on interests
+        // Add afternoon activity based on interests, try to use a new attraction when possible
         let afternoonActivity;
+        const nextAttraction = attractions[(attrIndex + 1) % attractions.length];
         if (interests.includes('food')) {
             afternoonActivity = { time: '12:30', name: 'Lunch at Traditional Restaurant', category: 'food', estimated_cost: 25, location: 'Local Restaurant' };
         } else if (interests.includes('shopping')) {
@@ -204,19 +236,20 @@ class TripPlannerApp {
             afternoonActivity = { time: '14:00', name: 'Adventure Activity', category: 'adventure', estimated_cost: 60, location: 'Adventure Hub' };
         } else {
             afternoonActivity = activityTemplates.afternoon[Math.floor(Math.random() * activityTemplates.afternoon.length)];
-            afternoonActivity.location = attractions[Math.floor(Math.random() * attractions.length)];
+            afternoonActivity.location = nextAttraction;
         }
         activities.push(afternoonActivity);
 
-        // Add evening activity
+        // Add evening activity, rotate again to keep variety
         let eveningActivity;
+        const lastAttraction = attractions[(attrIndex + 2) % attractions.length];
         if (interests.includes('nightlife')) {
             eveningActivity = { time: '20:00', name: 'Local Nightlife Experience', category: 'nightlife', estimated_cost: 50, location: 'Popular Nightclub' };
         } else if (interests.includes('food')) {
             eveningActivity = { time: '19:00', name: 'Dinner at Fine Restaurant', category: 'food', estimated_cost: 40, location: 'Upscale Restaurant' };
         } else {
             eveningActivity = activityTemplates.evening[Math.floor(Math.random() * activityTemplates.evening.length)];
-            eveningActivity.location = attractions[Math.floor(Math.random() * attractions.length)];
+            eveningActivity.location = lastAttraction;
         }
         activities.push(eveningActivity);
 
@@ -246,7 +279,7 @@ class TripPlannerApp {
                         <strong>📅 Duration:</strong> ${itinerary.totalDays} days
                     </div>
                     <div>
-                        <strong>💰 Total Budget:</strong> $${itinerary.totalBudget}
+                        <strong>💰 Total Budget:</strong> ${UtilityFunctions.formatUSDINR(itinerary.totalBudget)}
                     </div>
                     <div>
                         <strong>👥 Travelers:</strong> ${itinerary.travelers}
@@ -258,7 +291,8 @@ class TripPlannerApp {
                 <h3>Daily Itinerary</h3>
                 ${itinerary.days.map(day => `
                     <div class="day-plan">
-                        <h3>Day ${day.dayNumber} - ${day.date}</h3>
+                        <h3>Day ${day.dayNumber} - ${day.date}${day.place ? ' ('+day.place+')' : ''}</h3>
+                        ${day.place && day.place !== destination ? `<p style="color: var(--primary-color); font-weight: bold;">📦 Travel Day: head to ${day.place} and explore local attractions.</p>` : ''}
                         <p style="color: var(--success-color); margin-bottom: 1rem;">🛡️ Safety Level: ${day.safetyLevel}</p>
                         
                         ${day.activities.map(activity => `
@@ -267,14 +301,14 @@ class TripPlannerApp {
                                 <div class="activity-details">
                                     <h4>${activity.name}</h4>
                                     <p><strong>📍</strong> ${activity.location}</p>
-                                    <p><strong>💰</strong> Est. Cost: $${activity.estimated_cost}</p>
+                                    <p><strong>💰</strong> Est. Cost: ${UtilityFunctions.formatUSDINR(activity.estimated_cost)}</p>
                                     <p><strong>🏷️</strong> ${activity.category}</p>
                                 </div>
                             </div>
                         `).join('')}
                         
                         <div style="margin-top: 1rem; padding: 1rem; background: var(--light-bg); border-radius: 8px;">
-                            <strong>Estimated Daily Cost:</strong> $${day.estimatedCost} per person
+                            <strong>Estimated Daily Cost:</strong> ${UtilityFunctions.formatUSDINR(day.estimatedCost)} per person
                         </div>
                     </div>
                 `).join('')}

@@ -48,6 +48,9 @@ app.use('/api/safety', require('./routes/safety'));
 // Emergency System Routes
 app.use('/api/emergency', require('./routes/emergency'));
 
+// Local Cost Routes
+app.use('/api/costs', require('./routes/costs'));
+
 // ===== Error Handling Middleware =====
 app.use((err, req, res, next) => {
     console.error('Error:', err);

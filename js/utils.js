@@ -90,6 +90,16 @@ class UtilityFunctions {
     }
 
     /**
+     * Format both USD and INR together using a fixed exchange rate (can be extended later)
+     */
+    static formatUSDINR(amountUSD, amountINR = null) {
+        // simple conversion rate; in real use, call an API
+        const rate = 83; // 1 USD = 83 INR (approximate)
+        const inr = amountINR !== null ? amountINR : Math.round(amountUSD * rate);
+        return `$${amountUSD} (₹${inr})`;
+    }
+
+    /**
      * Decode JWT token (basic)
      */
     static decodeJWT(token) {

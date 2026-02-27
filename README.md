@@ -8,10 +8,17 @@ SafeWander is a comprehensive travel companion application that combines intelli
 
 ### 1. **AI-Powered Trip Planning**
 - Generate complete itineraries based on destination, time, budget, and interests
-- Day-wise activity plans with nearby attractions and estimated costs
+- Day-wise activity plans with nearby attractions and estimated costs, rotating through unique landmarks each day and even handling short hops to nearby destinations (e.g., Tirupati followed by Annavaram). Budget and activity costs are shown in **USD and INR** to support international travellers.
 - Personalized recommendations based on user preferences
 - Budget tracking and cost optimization
 - Itinerary sharing capabilities
+
+### 1.1 **Local Cost Estimator**
+- New tab for estimating average local prices
+- Input destination and item/service (food, transport, etc.)
+- Returns mock or calculated cost to help first-time visitors gauge expenses
+- Uses pre-populated sample data with random fallback for unknown locations
+
 
 ### 2. **Dynamic Safety Intelligence**
 - Real-time risk scoring for different areas
