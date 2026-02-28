@@ -21,9 +21,14 @@ SafeWander is a comprehensive travel companion application that combines intelli
 
 ### 1.2 **Service Hub – Food, Hotels & Rentals**
 - Single tab (labelled Food/Hotels) for requesting multiple services
-- Choose between Food, Hotel, or Car Rental and enter a search term
-- Displays mock results for restaurants, hotel rooms, or vehicles with details
+- Choose between Food, Hotel, or Car Rental and recommendations load automatically
+- **Advanced Filtering:**
+  - Filter by Area/Location (e.g., Downtown, Midtown, City Center)
+  - Filter by Budget Range (Low, Medium, High)
+  - Search by cuisine, amenities, or vehicle type
+- Displays rich mock results with ratings, prices, delivery times, amenities, capacity
 - Buttons allow placing orders, booking rooms, or renting cars – triggers notifications
+- Like Swiggy/Zomato, recommendations appear on tab open and service selection change
 - Easily extensible to integrate real delivery/hotel/car APIs later
 
 
