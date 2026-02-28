@@ -361,6 +361,33 @@ h3 {
         color: var(--text-dark);
     }
 
+    /* Service hub styles */
+    .service-container {
+        max-width: 600px;
+    }
+    .service-container .info-text {
+        font-size: 1rem;
+        color: var(--text-dark);
+    }
+    .service-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .service-name {
+        font-weight: bold;
+    }
+    .service-info {
+        font-size: 0.9rem;
+        color: var(--text-light);
+        margin-left: 1rem;
+    }
+    .order-btn {
+        margin-left: 1rem;
+    }
+
 
 /* ===== Dashboard Styles ===== */
 .dashboard-container {

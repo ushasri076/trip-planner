@@ -19,6 +19,13 @@ SafeWander is a comprehensive travel companion application that combines intelli
 - Returns mock or calculated cost to help first-time visitors gauge expenses
 - Uses pre-populated sample data with random fallback for unknown locations
 
+### 1.2 **Service Hub – Food, Hotels & Rentals**
+- Single tab (labelled Food/Hotels) for requesting multiple services
+- Choose between Food, Hotel, or Car Rental and enter a search term
+- Displays mock results for restaurants, hotel rooms, or vehicles with details
+- Buttons allow placing orders, booking rooms, or renting cars – triggers notifications
+- Easily extensible to integrate real delivery/hotel/car APIs later
+
 
 ### 2. **Dynamic Safety Intelligence**
 - Real-time risk scoring for different areas
@@ -54,6 +61,7 @@ travel/
 │   ├── app.js             # Main app controller
 │   ├── trip-planner.js    # Trip planning functionality
 │   ├── safety-analyzer.js # Safety analysis engine
+│   ├── services.js        # Food/hotels/car rental service hub
 │   ├── emergency-system.js # Emergency response system
 │   └── utils.js           # Utility functions
 ├── styles/                 # Additional stylesheets

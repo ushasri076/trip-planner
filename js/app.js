@@ -107,6 +107,7 @@ class SafeWanderApp {
         window.tripPlannerApp = new TripPlannerApp(this);
         window.safetyAnalyzerApp = new SafetyAnalyzerApp(this);
         window.localCostApp = new LocalCostApp(this);
+        window.servicesApp = new ServicesApp(this);
         window.emergencySystemApp = new EmergencySystemApp(this);
     }
 
